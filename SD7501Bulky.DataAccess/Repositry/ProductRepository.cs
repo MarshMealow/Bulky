@@ -17,10 +17,31 @@ namespace SD7501Bulky.DataAccess.Repositry
         {
             _db = db;
         }
+       
+        public void Save()
+        {
+            _db.SaveChanges();
+        }
 
         public void Update(Product obj)
         {
-            _db.Update(obj);
+            var objFromDb = _db.Products.FirstOrDefault(u => u.Id == obj.Id);
+            if (objFromDb != null)
+            {
+                objFromDb.Title = obj.Title;
+                objFromDb.Description = obj.Description;
+                objFromDb.Category = obj.Category;
+                objFromDb.Price = obj.Price;
+                objFromDb.ListPrice = obj.ListPrice;
+                objFromDb.Price50 = obj.Price50;
+                objFromDb.Price100 = obj.Price100;
+                objFromDb.ISBN = obj.ISBN;
+                objFromDb.Author = obj.Author;
+                if (obj.ImageUrl != null)
+                {
+                    objFromDb.ImageUrl = obj.ImageUrl;
+                }
+            }
         }
     }
 }

@@ -11,8 +11,8 @@ namespace SD7501Bulky.DataAccess.Repositry.IRespositry
     public interface IRespository<T> where T : class
     {
         //T - Category
-        IEnumerable<T> GetAll();
-        T Get(Expression<Func<T, bool>> fitler);
+        IEnumerable<T> GetAll(string? includingProperties = null);
+        T Get(Expression<Func<T, bool>> fitler, string? includingProperties = null);
         void Add(T enitity);
         void Remove(T enitity);
         void RemoveRnage(IEnumerable<T> enitity);
